@@ -1,5 +1,3 @@
-import java.io.IOException;
-
 public class BruteForce {
 
     public static void bruteForce(String source, String dest) {

@@ -1,5 +1,3 @@
-
-import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
@@ -17,8 +15,6 @@ public class Analyze {
             HashMap<Character, Float> dictionaryCharMap = new HashMap<>();
             HashMap<Character, Float> encryptedCharMap = new HashMap<>();
 
-            HashMap<Character, Character> replaceCharMap = new HashMap<>();
-
             //encrypted and dictionary files are copied to ArrayLists
             fileToList(dictionaryReader, dictionaryCharList, dictionaryReader.read());
             fileToList(sourceReader, encryptedCharList, Character.toLowerCase(sourceReader.read()));
@@ -32,22 +28,21 @@ public class Analyze {
             HashMap<Character, Float> sortedEncryptedCharMap = Analyze.sortHashMapByValues(encryptedCharMap);
 
             //keys from sorted maps copied to ArrayLists in same order
-            ArrayList<Character> list1 = new ArrayList<>(sortedDictionaryCharMap.keySet());
-            ArrayList<Character> list2 = new ArrayList<>(sortedEncryptedCharMap.keySet());
+            ArrayList<Character> dictionaryMapKeys = new ArrayList<>(sortedDictionaryCharMap.keySet());
+            ArrayList<Character> encryptedMapKeys = new ArrayList<>(sortedEncryptedCharMap.keySet());
 
-
-            fileWriter(destWriter, encryptedCharList, list1, list2);
+            writeStatisticDataToFile(destWriter, encryptedCharList, dictionaryMapKeys, encryptedMapKeys);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void fileWriter(BufferedWriter destWriter, ArrayList<Character> encryptedCharList, ArrayList<Character> list1, ArrayList<Character> list2) throws IOException {
+    private static void writeStatisticDataToFile(BufferedWriter destWriter, ArrayList<Character> encryptedCharList, ArrayList<Character> dictionaryMapKeys, ArrayList<Character> encryptedMapKeys) throws IOException {
         for (char character : encryptedCharList) {
-            for (int j = 0; j < list2.size(); j++) {
-                if (character == list2.get(j)) {
-                    destWriter.write(list1.get(j));
+            for (int j = 0; j < encryptedMapKeys.size(); j++) {
+                if (character == encryptedMapKeys.get(j)) {
+                    destWriter.write(dictionaryMapKeys.get(j));
                 }
             }
 
@@ -68,9 +63,9 @@ public class Analyze {
     }
 
 
-    private static void fileToList(BufferedReader dictionaryReader, ArrayList<Character> dictionaryCharList, int dictionaryReader1) throws IOException {
+    private static void fileToList(BufferedReader dictionaryReader, ArrayList<Character> dictionaryCharList, int character) throws IOException {
         while (dictionaryReader.ready()) {
-            dictionaryCharList.add((char) dictionaryReader1);
+            dictionaryCharList.add((char) character);
         }
     }
 
@@ -82,7 +77,7 @@ public class Analyze {
 
         LinkedHashMap<Character, Float> sortedMap = new LinkedHashMap<>();
 
-        for (Float val : mapValues){
+        for (Float val : mapValues) {
             Iterator<Character> keyIt = mapKeys.iterator();
             while (keyIt.hasNext()) {
                 char key = keyIt.next();
