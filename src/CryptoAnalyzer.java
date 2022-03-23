@@ -1,14 +1,9 @@
+import java.io.IOException;
 import java.util.Scanner;
 
-public class KriptoAnalizator {
-    public static void main(String[] args)  {
+public class CryptoAnalyzer {
+    public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
-        String sourceFile = "C:/Users/esmulko/IdeaProjects/Kriptoanalizator/ViM.txt";
-        String destFile = "C:/Users/esmulko/IdeaProjects/Kriptoanalizator/skazka2.txt";
-        String destFile2 = "C:/Users/esmulko/IdeaProjects/Kriptoanalizator/skazka3.txt";
-        String exampleFile = "C:/Users/esmulko/IdeaProjects/Kriptoanalizator/primer.txt";
-        String whiteGuard = "C:/Users/esmulko/IdeaProjects/Kriptoanalizator/whiteguard.txt";
-        String encrypted = "C:/Users/esmulko/IdeaProjects/Kriptoanalizator/encrypted.txt";
         String source;
         String dest;
         String dictionary;
@@ -53,12 +48,12 @@ public class KriptoAnalizator {
             case 4 -> {
                 System.out.println("Analyze");
                 System.out.println("В ведите путь к файлу для дешифрования:");
-                source = encrypted;//FileCheck.inputPathCheck();
+                source = FileCheck.inputPathCheck();
                 System.out.println("В ведите путь к файлу для анализа статистики:");
-                dictionary = whiteGuard;//FileCheck.inputPathCheck();
+                dictionary = FileCheck.inputPathCheck();
                 System.out.println("В ведите путь для расшифрованого файла:");
-                dest = destFile2;//FileCheck.outputPathCheck();
-                Analyze.analyze(source, dest, dictionary);
+                dest = FileCheck.outputPathCheck();
+                StatisticAnalyze.analyze(source, dest, dictionary);
             }
             case 5 -> System.out.println("Программа закрылась!");
             default -> System.out.println("Вы в выбрали неверную команду.");
