@@ -2,44 +2,67 @@ import java.io.*;
 import java.util.Scanner;
 
 public class KriptoAnalizator {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args)  {
         Scanner scanner = new Scanner(System.in);
-        // String sourceFile = "C:/Users/esmulko/IdeaProjects/Kriptoanalizator/sometext.txt";
-        String sourceFile = "C:/Users/esmulko/IdeaProjects/Kriptoanalizator/skazka.txt";
-        //String destFile = "C:/Users/esmulko/IdeaProjects/Kriptoanalizator/sometext_excrypt.txt";
+        String sourceFile = "C:/Users/esmulko/IdeaProjects/Kriptoanalizator/ViM.txt";
         String destFile = "C:/Users/esmulko/IdeaProjects/Kriptoanalizator/skazka2.txt";
         String destFile2 = "C:/Users/esmulko/IdeaProjects/Kriptoanalizator/skazka3.txt";
-
-        System.out.println("В ведите путь к файлу, который необходимо зашифровать или расшифровать");
-        String source = destFile;//scanner.nextLine();
-        System.out.println("В ведите путь к новому файлу, в который будет записан результат");
-        String dest = destFile2;//scanner.nextLine();
+        String exampleFile = "C:/Users/esmulko/IdeaProjects/Kriptoanalizator/primer.txt";
+        String whiteGuard = "C:/Users/esmulko/IdeaProjects/Kriptoanalizator/whiteguard.txt";
+        String encrypted = "C:/Users/esmulko/IdeaProjects/Kriptoanalizator/encrypted.txt";
+        String source;
+        String dest;
+        String example;
+        int key;
 
         System.out.print("""
                 Выберите операцию:
-                Шифрование => в ведите 1
-                Расшифровка => в ведите 2
-                Взлом(brute force) => в ведите 3
+                1. Шифрование
+                2. Расшифровка
+                3. Взлом(brute force)
+                4. Анализ
+                5. Выход
                 """);
+
         int choice = scanner.nextInt();
         switch (choice) {
             case 1 -> {
+                System.out.println("В ведите путь к файлу для шифрования:");
+                source = sourceFile;//FileCheck.inputPathCheck();
+                System.out.println("В ведите путь для зашифрованого файла:");
+                dest = destFile;//FileCheck.outputPathCheck();
                 System.out.println("В ведите ключ:");
-                int key = scanner.nextInt();
+                key = scanner.nextInt();
                 Encrypt.encrypt(source, dest, key);
             }
             case 2 -> {
+                System.out.println("В ведите путь к файлу для дешифрования:");
+                source = FileCheck.inputPathCheck();
+                System.out.println("В ведите путь для расшифрованого файла:");
+                dest = FileCheck.outputPathCheck();
                 System.out.println("В ведите ключ:");
-                int key2 = scanner.nextInt();
-                Decrypt.decryptWithKey(source, dest, key2);
+                key = scanner.nextInt();
+                Decrypt.decryptWithKey(source, dest, key);
             }
             case 3 -> {
-                System.out.println("brute force");
-                Decrypt.bruteForce(source, dest);
+                System.out.println("В ведите путь к файлу для дешифрования:");
+                source = FileCheck.inputPathCheck();
+                System.out.println("В ведите путь для расшифрованого файла:");
+                dest = FileCheck.outputPathCheck();
+                BruteForce.bruteForce(source, dest);
             }
-            default -> {
-                System.out.println("default");
+            case 4 -> {
+                System.out.println("Analyze");
+                System.out.println("В ведите путь к файлу для дешифрования:");
+                source = destFile;//FileCheck.inputPathCheck();
+                System.out.println("В ведите путь к файлу для анализа статистики:");
+                example = exampleFile;//FileCheck.inputPathCheck();
+                System.out.println("В ведите путь для расшифрованого файла:");
+                dest = destFile2;//FileCheck.outputPathCheck();
+                Analyze.analyze(source, dest, example);
             }
+            case 5 -> System.out.println("Программа закрылась!");
+            default -> System.out.println("Вы в выбрали неверную команду.");
         }
     }
 }
