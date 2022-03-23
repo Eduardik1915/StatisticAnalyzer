@@ -3,9 +3,9 @@ import java.nio.file.Path;
 import java.util.Scanner;
 
 public class FileCheck {
+    static Scanner scanner = new Scanner(System.in);
 
     public static String inputPathCheck() {
-        Scanner scanner = new Scanner(System.in);
         String filePath;
         Path path;
         while (true) {
@@ -21,11 +21,9 @@ public class FileCheck {
     }
 
     public static String outputPathCheck() {
-        Scanner scanner = new Scanner(System.in);
         String filePath;
-        Path path;
         while (true) {
-            path = Path.of(scanner.nextLine());
+            Path path = Path.of(String.valueOf(scanner.nextLine()));
             Path parent = path.getParent();
             if (Files.isDirectory(parent)) {
                 filePath = String.valueOf(path);

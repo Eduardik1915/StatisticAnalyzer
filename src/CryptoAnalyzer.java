@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class CryptoAnalyzer {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String source;
         String dest;
@@ -23,11 +23,12 @@ public class CryptoAnalyzer {
             case 1 -> {
                 System.out.println("В ведите путь к файлу для шифрования:");
                 source = FileCheck.inputPathCheck();
-                System.out.println("В ведите путь для зашифрованого файла:");
+                System.out.println("В ведите путь для зашифрованого файла или оставьте пустым для выбора файла по умолчанию:");
                 dest = FileCheck.outputPathCheck();
                 System.out.println("В ведите ключ:");
                 key = scanner.nextInt();
                 Encrypt.encrypt(source, dest, key);
+                System.out.println("Готово!");
             }
             case 2 -> {
                 System.out.println("В ведите путь к файлу для дешифрования:");
@@ -37,6 +38,7 @@ public class CryptoAnalyzer {
                 System.out.println("В ведите ключ:");
                 key = scanner.nextInt();
                 Decrypt.decryptWithKey(source, dest, key);
+                System.out.println("Готово!");
             }
             case 3 -> {
                 System.out.println("В ведите путь к файлу для дешифрования:");
@@ -44,9 +46,9 @@ public class CryptoAnalyzer {
                 System.out.println("В ведите путь для расшифрованого файла:");
                 dest = FileCheck.outputPathCheck();
                 BruteForce.bruteForce(source, dest);
+                System.out.println("Готово!");
             }
             case 4 -> {
-                System.out.println("Analyze");
                 System.out.println("В ведите путь к файлу для дешифрования:");
                 source = FileCheck.inputPathCheck();
                 System.out.println("В ведите путь к файлу для анализа статистики:");
@@ -54,8 +56,9 @@ public class CryptoAnalyzer {
                 System.out.println("В ведите путь для расшифрованого файла:");
                 dest = FileCheck.outputPathCheck();
                 StatisticAnalyze.analyze(source, dest, dictionary);
+                System.out.println("Готово!");
             }
-            case 5 -> System.out.println("Программа закрылась!");
+            case 5 -> System.out.println("Всего хорошего!");
             default -> System.out.println("Вы в выбрали неверную команду.");
         }
     }
