@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.Scanner;
 
 public class CryptoAnalyzer {
@@ -23,7 +22,7 @@ public class CryptoAnalyzer {
             case 1 -> {
                 System.out.println("В ведите путь к файлу для шифрования:");
                 source = FileCheck.inputPathCheck();
-                System.out.println("В ведите путь для зашифрованого файла или оставьте пустым для выбора файла по умолчанию:");
+                System.out.println("В ведите путь для зашифрованого файла:");
                 dest = FileCheck.outputPathCheck();
                 System.out.println("В ведите ключ:");
                 key = scanner.nextInt();
